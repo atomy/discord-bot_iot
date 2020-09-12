@@ -12,7 +12,8 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'iot-discord-bot-ecr-prefix', variable: 'ECR_PREFIX'),
                     string(credentialsId: 'iot-discord-bot-kitchen-discord-key', variable: 'DISCORD_KEY_KITCHEN'),
-                    string(credentialsId: 'iot-discord-bot-buero-discord-key', variable: 'DISCORD_KEY_BUERO')]) {
+                    string(credentialsId: 'iot-discord-bot-buero-discord-key', variable: 'DISCORD_KEY_BUERO'),
+                    string(credentialsId: 'iot-discord-bot-relay-discord-key', variable: 'DISCORD_KEY_RELAY')]) {
                         echo 'Configuring...'
                         sh './scripts/configure.sh'
                         echo 'Configuring...DONE'

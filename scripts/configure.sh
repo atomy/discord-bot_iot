@@ -17,6 +17,11 @@ if [ -z "${DISCORD_KEY_KITCHEN}" ] ; then
   exit 1
 fi
 
+if [ -z "${DISCORD_KEY_RELAY}" ] ; then
+  echo "ENV: DISCORD_KEY_RELAY is missing!"
+  exit 1
+fi
+
 rm -f scripts/build.sh
 rm -f scripts/push.sh
 rm -f docker-compose.yml
@@ -28,6 +33,10 @@ sed -i "s|xxx|${DISCORD_KEY_BUERO}|" docker-compose.buero.yml
 cp docker-compose.kitchen.yml.dist docker-compose.kitchen.yml
 sed -i "s|xxx.dkr.ecr.eu-central-1.amazonaws.com|${ECR_PREFIX}|" docker-compose.kitchen.yml
 sed -i "s|xxx|${DISCORD_KEY_KITCHEN}|" docker-compose.kitchen.yml
+
+cp docker-compose.relay.yml.dist docker-compose.relay.yml
+sed -i "s|xxx.dkr.ecr.eu-central-1.amazonaws.com|${ECR_PREFIX}|" docker-compose.relay.yml
+sed -i "s|xxx|${DISCORD_KEY_RELAY}|" docker-compose.relay.yml
 
 cp scripts/build.sh.dist scripts/build.sh
 sed -i "s|xxx.dkr.ecr.eu-central-1.amazonaws.com|${ECR_PREFIX}|" scripts/build.sh

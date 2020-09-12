@@ -2,7 +2,7 @@
 
 set -e
 
-scp ~/.docker/config.json app@192.168.2.20:~/.docker/config.json
+scp -o StrictHostKeyChecking=no ~/.docker/config.json pi@192.168.2.20:~/.docker/config.json
 
 scp -o StrictHostKeyChecking=no docker-compose.kitchen.yml pi@${ip}:/home/pi/apps/discord-bot_iot_kitchen/docker-compose.yml
 #scp -o StrictHostKeyChecking=no docker-compose.buero.yml pi@${ip}:/home/pi/apps/discord-bot_iot_buero/docker-compose.yml

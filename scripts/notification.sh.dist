@@ -10,5 +10,5 @@ NEW_VERSION=<new-version>
 
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d "{\"username\": \"Jenkins-Release\", \"content\": \"Released **<app-name>** -- **<current-version>** -> **<new-version>**\n${CHANGES}\"}" \
+  -d "{\"username\": \"Jenkins-Release\", \"content\": \"[`hostname`] Released **<app-name>** -- **<current-version>** -> **<new-version>**\n${CHANGES}\"}" \
   ${DISCORD_WEBHOOK_URL}

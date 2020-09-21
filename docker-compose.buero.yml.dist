@@ -6,5 +6,5 @@ services:
     restart: always
     environment:
         DISCORD_API_KEY: 'xxx'
-        IOT_HOSTNAME_SELEKTOR: 'mars'
+        IOT_HOSTNAME_SELEKTOR: 'pi-buero'
         NATS_IP: '192.168.2.20'

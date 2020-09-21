@@ -44,19 +44,22 @@ setupNatsConnection = () => {
             // only update every 60s
             if (currentUnixTimestamp - lastUpdate > 60) {
                 lastUpdate = currentUnixTimestamp
-                const activityMessage = getFormattedUptime(message.uptime)
-                console.log('Setting activity: ' + activityMessage)
-                client.user.setActivity(activityMessage, {type: 'WATCHING'});
+                console.log('Setting activity: ' + message.load)
+                client.user.setActivity(message.load, {type: 'WATCHING'});
             }
         }
     })
 }
 
-// format uptime-line to set into activity
-getFormattedUptime = (inputUptime) => {
-    let matches = inputUptime.match(/load average: ([0-9\.]+), ([0-9\.]+), ([0-9\.]+)/)
-    return util.format('L: %s|%s|%s', matches[1], matches[2], matches[3])
-}
+// // format uptime-line to set into activity
+// getFormattedUptime = (inputUptime) => {
+//     if (!inputUptime) {
+//         return 'N/A'
+//     }
+//
+//     let matches = inputUptime.match(/load average: ([0-9\.]+), ([0-9\.]+), ([0-9\.]+)/)
+//     return util.format('L: %s|%s|%s', matches[1], matches[2], matches[3])
+// }
 
 console.log("Connecting and login in...")
 client.login(discordApiKey)

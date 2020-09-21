@@ -13,7 +13,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'iot-discord-bot-ecr-prefix', variable: 'ECR_PREFIX'),
                     string(credentialsId: 'iot-discord-bot-kitchen-discord-key', variable: 'DISCORD_KEY_KITCHEN'),
                     string(credentialsId: 'iot-discord-bot-buero-discord-key', variable: 'DISCORD_KEY_BUERO'),
-                    string(credentialsId: 'iot-discord-bot-relay-discord-key', variable: 'DISCORD_KEY_RELAY')]) {
+                    string(credentialsId: 'iot-discord-bot-relay-discord-key', variable: 'DISCORD_KEY_RELAY'),
+                    string(credentialsId: 'discord-webhook-release-url', variable: 'DISCORD_WEBHOOK_URL')]) {
                         echo 'Configuring...'
                         sh './scripts/configure.sh'
                         echo 'Configuring...DONE'
@@ -52,12 +53,6 @@ pipeline {
                     sh './scripts/deploy.sh'
                 }
                 echo 'Deploying....DONE'
-
-                withCredentials([string(credentialsId: 'discord-webhook-release-url', variable: 'DISCORD_WEBHOOK_URL')]) {
-                        echo 'Sending release-notification...'
-                        sh './scripts/notification.sh'
-                        echo 'Sending release-notification...DONE'
-                }
             }
         }
     }

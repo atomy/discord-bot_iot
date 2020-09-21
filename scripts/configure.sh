@@ -27,6 +27,11 @@ if [ -z "${APP_NAME}" ] ; then
   exit 1
 fi
 
+if [ -z "${DISCORD_WEBHOOK_URL}" ] ; then
+  echo "ENV: DISCORD_WEBHOOK_URL is missing!"
+  exit 1
+fi
+
 rm -f scripts/build.sh
 rm -f scripts/push.sh
 rm -f docker-compose.yml

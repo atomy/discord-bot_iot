@@ -32,3 +32,12 @@ else
 fi
 
 echo $NEW_TAG > current_version
+
+CURRENT_VERSION=`git describe --abbrev=0 --tags ${NEW_VERSION}^`
+
+CHANGES=`git log --pretty=format:%B ${CURRENT_VERSION}..${NEW_VERSION} | sort | uniq`
+echo ${CHANGES} | sed ':a;N;$!ba;s/\n/\\\n/g' > changes
+
+sed -i "s|<discord-webhoook-url>|${DISCORD_WEBHOOK_URL}|" scripts/notification.sh
+sed -i "s|<new-version>|${CURRENT_VERSION}|" scripts/notification.sh
+sed -i "s|<current-version>|${NEW_TAG}|" scripts/notification.sh

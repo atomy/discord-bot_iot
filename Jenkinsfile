@@ -4,7 +4,7 @@ pipeline {
     }
 
     environment {
-        APP_NAME = 'iot-media-emitter'
+        APP_NAME = 'iot-discord-bot'
     }
 
     stages {

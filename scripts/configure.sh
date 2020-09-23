@@ -7,8 +7,8 @@ if [ -z "${ECR_PREFIX}" ] ; then
   exit 1
 fi
 
-if [ -z "${DISCORD_KEY_BUERO}" ] ; then
-  echo "ENV: DISCORD_KEY_BUERO is missing!"
+if [ -z "${DISCORD_KEY_OFFICE}" ] ; then
+  echo "ENV: DISCORD_KEY_OFFICE is missing!"
   exit 1
 fi
 
@@ -36,9 +36,9 @@ rm -f scripts/build.sh
 rm -f scripts/push.sh
 rm -f docker-compose.yml
 
-cp docker-compose.buero.yml.dist docker-compose.buero.yml
-sed -i "s|xxx.dkr.ecr.eu-central-1.amazonaws.com|${ECR_PREFIX}|" docker-compose.buero.yml
-sed -i "s|xxx|${DISCORD_KEY_BUERO}|" docker-compose.buero.yml
+cp docker-compose.office.yml.dist docker-compose.office.yml
+sed -i "s|xxx.dkr.ecr.eu-central-1.amazonaws.com|${ECR_PREFIX}|" docker-compose.office.yml
+sed -i "s|xxx|${DISCORD_KEY_OFFICE}|" docker-compose.office.yml
 
 cp docker-compose.kitchen.yml.dist docker-compose.kitchen.yml
 sed -i "s|xxx.dkr.ecr.eu-central-1.amazonaws.com|${ECR_PREFIX}|" docker-compose.kitchen.yml

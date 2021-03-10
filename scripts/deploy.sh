@@ -2,16 +2,29 @@
 
 set -e
 
-ips=( "192.168.2.20" "192.168.2.21" "192.168.2.22" )
+echo "Deploying to pi-kitchen@192.168.2.22..."
+scp -o StrictHostKeyChecking=no ~/.docker/config.json pi@192.168.2.22:~/.docker/config.json
+scp -o StrictHostKeyChecking=no docker-compose.kitchen.yml pi@192.168.2.22:/home/pi/apps/discord-bot_iot/docker-compose.yml
+scp -o StrictHostKeyChecking=no scripts/deployInner.sh pi@192.168.2.22:/home/pi/apps/discord-bot_iot/deployInner.sh
+scp -o StrictHostKeyChecking=no scripts/notification.sh pi@192.168.2.22:/home/pi/apps/discord-bot_iot/notification.sh
+scp -o StrictHostKeyChecking=no changes pi@192.168.2.22:/home/pi/apps/discord-bot_iot/changes
+ssh -o StrictHostKeyChecking=no pi@192.168.2.22 "cd /home/pi/apps/discord-bot_iot && ./deployInner.sh"
+echo "Deploying to pi-kitchen@192.168.2.22...DONE"
 
-for ip in "${ips[@]}"
-do
-  echo "Deploying to pi@${ip}..."
-  scp -o StrictHostKeyChecking=no ~/.docker/config.json pi@${ip}:~/.docker/config.json
-  scp -o StrictHostKeyChecking=no docker-compose.kitchen.yml pi@${ip}:/home/pi/apps/discord-bot_iot/docker-compose.yml
-  scp -o StrictHostKeyChecking=no scripts/deployInner.sh pi@${ip}:/home/pi/apps/discord-bot_iot/deployInner.sh
-  scp -o StrictHostKeyChecking=no scripts/notification.sh pi@${ip}:/home/pi/apps/discord-bot_iot/notification.sh
-  scp -o StrictHostKeyChecking=no changes pi@${ip}:/home/pi/apps/discord-bot_iot/changes
-  ssh -o StrictHostKeyChecking=no pi@${ip} "cd /home/pi/apps/discord-bot_iot && ./deployInner.sh"
-  echo "Deploying to pi@${ip}...DONE"
-done
+echo "Deploying to pi-office@192.168.2.21..."
+scp -o StrictHostKeyChecking=no ~/.docker/config.json pi@192.168.2.21:~/.docker/config.json
+scp -o StrictHostKeyChecking=no docker-compose.office.yml pi@192.168.2.21:/home/pi/apps/discord-bot_iot/docker-compose.yml
+scp -o StrictHostKeyChecking=no scripts/deployInner.sh pi@192.168.2.21:/home/pi/apps/discord-bot_iot/deployInner.sh
+scp -o StrictHostKeyChecking=no scripts/notification.sh pi@192.168.2.21:/home/pi/apps/discord-bot_iot/notification.sh
+scp -o StrictHostKeyChecking=no changes pi@192.168.2.21:/home/pi/apps/discord-bot_iot/changes
+ssh -o StrictHostKeyChecking=no pi@192.168.2.21 "cd /home/pi/apps/discord-bot_iot && ./deployInner.sh"
+echo "Deploying to pi-office@192.168.2.21...DONE"
+
+echo "Deploying to pi-relay2@192.168.2.20..."
+scp -o StrictHostKeyChecking=no ~/.docker/config.json pi@192.168.2.20:~/.docker/config.json
+scp -o StrictHostKeyChecking=no docker-compose.relay.yml pi@192.168.2.20:/home/pi/apps/discord-bot_iot/docker-compose.yml
+scp -o StrictHostKeyChecking=no scripts/deployInner.sh pi@192.168.2.20:/home/pi/apps/discord-bot_iot/deployInner.sh
+scp -o StrictHostKeyChecking=no scripts/notification.sh pi@192.168.2.20:/home/pi/apps/discord-bot_iot/notification.sh
+scp -o StrictHostKeyChecking=no changes pi@192.168.2.20:/home/pi/apps/discord-bot_iot/changes
+ssh -o StrictHostKeyChecking=no pi@192.168.2.20 "cd /home/pi/apps/discord-bot_iot && ./deployInner.sh"
+echo "Deploying to pi-relay2@192.168.2.20...DONE"
